@@ -10,3 +10,6 @@ class Course(models.Model):
     discount = models.IntegerField(blank=False, null=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     thumbnail = models.CharField(max_length=200, blank=False, null=False)
+
+    def __str__(self):
+        return self.title
