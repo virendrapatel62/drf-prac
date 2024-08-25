@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include('users.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/courses/', include('courses.urls', namespace='courses')),
+    path('api/enrollments/', include('orders.urls', namespace='enrollments')),
 ]

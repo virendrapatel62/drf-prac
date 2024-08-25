@@ -1,12 +1,23 @@
 
 from django.urls import path, include
-from .views import get_courses, get_course
 
+from rest_framework import routers
+
+
+# from .views import CourseListCreateApiView, CourseDestroyApiView
+from .views import CourseViewSet
 
 app_name = 'courses'
 
 
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'', CourseViewSet)
+
+
 urlpatterns = [
-    path('', get_courses),
-    path('<pk:int>', get_course)
+    # path('', CourseListCreateApiView.as_view(), name='course-list'),
+    # path('<int:pk>/', CourseDestroyApiView.as_view(), name='course-list')
+    path('', include(router.urls))
+
 ]

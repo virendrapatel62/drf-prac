@@ -1,21 +1,23 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAdminUser
 from .models import Course
-from rest_framework.response import Response
 from .serializers import CourseSerializer
 
 
-from rest_framework.decorators import api_view
+class CourseViewSet(viewsets.ModelViewSet):
+    serializer_class = CourseSerializer
+    queryset = Course.objects.all()
 
 
-@api_view(['GET'])
-def get_courses(request):
-    courses = Course.objects.all()
-    serializer = CourseSerializer(courses, many=True)
-    return Response(serializer.data)
+'''
+class CourseDestroyApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
 
 
-@api_view(['GET'])
-def get_course(request, pk):
-    course = Course.objects.get(pk=pk)
-    serializer = CourseSerializer(course)
-    return Response(serializer.data)
+class CourseListCreateApiView(generics.ListCreateAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+'''
